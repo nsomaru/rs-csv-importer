@@ -373,6 +373,9 @@ class RSCSV_Import_Post_Helper
             $attachment_id          = wp_insert_attachment($attachment, $file, ($post instanceof WP_Post) ? $post->ID : null);
             $attachment_metadata    = wp_generate_attachment_metadata( $attachment_id, $file );
             wp_update_attachment_metadata($attachment_id, $attachment_metadata);
+            // alt tag
+            $alt = apply_filters('really_simple_csv_importer_attachment_alt', $post->post_title, $post);
+            update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt );
             return $attachment_id;
         }
         // On failure
