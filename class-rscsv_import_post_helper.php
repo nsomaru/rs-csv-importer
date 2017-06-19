@@ -306,7 +306,7 @@ class RSCSV_Import_Post_Helper
     public function addMediaFile($file, $data = null)
     {
         if (parse_url($file, PHP_URL_SCHEME)) {
-            $file = $this->remoteGet($file);
+            $file = $this->remoteGet($file, null, $data);
         }
         $id = $this->setAttachment($file, $data);
         if ($id) {
@@ -327,7 +327,7 @@ class RSCSV_Import_Post_Helper
         $post = $this->getPost();
         if ($post instanceof WP_Post) {
             if (parse_url($file, PHP_URL_SCHEME)) {
-                $file = $this->remoteGet($file);
+                $file = $this->remoteGet($file, null, $post);
             }
             $thumbnail_id = $this->setAttachment($file);
             if ($thumbnail_id) {
@@ -401,7 +401,7 @@ class RSCSV_Import_Post_Helper
      * @param (array) $args
      * @return (string) file path
      */
-    public function remoteGet($url, $args = array())
+    public function remoteGet($url, $args = array(), $data = array())
     {
         global $wp_filesystem;
         if (!is_object($wp_filesystem)) {
@@ -412,7 +412,7 @@ class RSCSV_Import_Post_Helper
             $response = wp_safe_remote_get($url, $args);
             if (!is_wp_error($response) && $response['response']['code'] === 200) {
                 $destination = wp_upload_dir();
-                $filename = basename($url);
+                $filename = apply_filters('really_simple_csv_importer_remote_get_filename', basename($url), $url, $data);
                 $filepath = $destination['path'] . '/' . wp_unique_filename($destination['path'], $filename);
                 
                 $body = wp_remote_retrieve_body($response);
