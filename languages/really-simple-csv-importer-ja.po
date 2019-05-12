@@ -107,7 +107,7 @@ msgid "Invalid post type \"%s\"."
 msgstr "\"%s\" は不正な投稿タイプです。"
 
 #: rs-csv-importer.php:177
-msgid "Note: Please include post_type value if that is possible."
+msgid "Note: post_type was not set. Defaulting to “post”"
 msgstr "﻿注: 可能な場合 post_type 値を記載してください。"
 
 #: rs-csv-importer.php:192

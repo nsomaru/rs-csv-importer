@@ -193,7 +193,8 @@ class RS_CSV_Importer extends WP_Importer {
 						$error->add( 'post_type_exists', sprintf(__('Invalid post type "%s".', 'really-simple-csv-importer'), $post_type) );
 					}
 				} else {
-					echo __('Note: Please include post_type value if that is possible.', 'really-simple-csv-importer').'<br>';
+					$post['post_type'] = 'post';
+					echo __('Note: post_type was not set. Defaulting to “post”', 'really-simple-csv-importer').'<br>';
 				}
 				
 				// (int) post id

@@ -95,7 +95,7 @@ msgid "Invalid post type \"%s\"."
 msgstr ""
 
 #: rs-csv-importer.php:177
-msgid "Note: Please include post_type value if that is possible."
+msgid "Note: post_type was not set. Defaulting to “post”"
 msgstr ""
 
 #: rs-csv-importer.php:192
